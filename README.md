@@ -1,1 +1,1 @@
-# tetris
+# Tetris for UnicornHat/Raspberry Pi
