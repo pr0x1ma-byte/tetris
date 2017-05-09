@@ -27,23 +27,9 @@ while True:
       obj.rotate();
 '''
 from math import radians,cos,sin
-#adjacent over hypotenuse is cos(theta)
-#opposite over hypotenuse is sin(theta)
-#xp = xcos(theta) - ysin(theta)
-#yp = xsin(theta) + ycos(theta)
 
-'''deg =90
-theta = radians(deg)  # Convert angle from degrees to radians
-cosang, sinang = cos(theta), sin(theta)
-_x=4
-_y=4
 
-xp = _x*cosang - _y*sinang
-yp = _x*sinang + _y*cosang
-
-print xp
-print yp
-
+'''
 from Line import Line
 obj = Line()
 while True:
