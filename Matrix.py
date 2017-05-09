@@ -5,8 +5,6 @@ from math import sin, cos, radians
 #xp = xcos(theta) - ysin(theta)
 #yp = xsin(theta) + ycos(theta)
 
-#theta = radians(deg)  # Convert angle from degrees to radians
-#cosang, sinang = cos(theta), sin(theta)
 #x=1
 #y=0
 
