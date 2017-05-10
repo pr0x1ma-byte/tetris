@@ -31,7 +31,9 @@ from math import radians,cos,sin
 
 '''
 from Line import Line
-obj = Line()
+from LRectangle import LRectangleR
+from LRectangle import LRectangleL
+obj = LRectangleR()
 while True:
       old = obj.getLine()
       count=0
@@ -46,8 +48,10 @@ while True:
 
 from Line import Line
 from Triangle import Triangle
+from LRectangle import LRectangleR
+from LRectangle import LRectangleL
 print "------Original--------------------------"
-obj = Line()
+obj = LRectangleR();
 old = obj.getShape();
 print old
 print "------Rotated---------------------------"
