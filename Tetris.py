@@ -47,7 +47,7 @@ while True:
 from Line import Line
 from Triangle import Triangle
 print "------Original--------------------------"
-obj = Triangle()
+obj = Line()
 old = obj.getShape();
 print old
 print "------Rotated---------------------------"
