@@ -50,6 +50,15 @@ from Line import Line
 from Triangle import Triangle
 from LRectangle import LRectangleR
 from LRectangle import LRectangleL
+print "LRectangleL"
+print "------Original--------------------------"
+obj = LRectangleL();
+old = obj.getShape();
+print old
+print "------Rotated---------------------------"
+xy = obj.rotate()
+print xy
+print "LRectangleR"
 print "------Original--------------------------"
 obj = LRectangleR();
 old = obj.getShape();

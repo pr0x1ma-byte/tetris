@@ -1,37 +1,47 @@
 from Shapes import Shapes
+from Line import Line
 import math
 class  LRectangle(Shapes):
     def __init__(self):
-	self.self = self
-#	self.type
-#        self.origin
-#        self.point_1
-#	self.point_2
-#	self.point_3
-#	self.angle   = math.radians(90)
+        self.origin    = []
+        self.point_1   = []
+        self.point_2   = []
+        self.point_3   = []
+        self.points    = []
+        self.angle     = math.radians(90);
+        self.direction = 0
         self.generate()
-	Shapes.__init__(self,self.origin,self.points.self.angle)
+	Shapes.__init__(self,self.origin, self.points,self.angle)		
     def generate(self):
-        print str(self.type)
-       
+        line = Line();
+        self.origin  = line.origin
+	self.point_1 = line.point_1
+        self.point_2 = line.point_2
+        self.direction = line.direction
+        _v = 1;
+        if self.type > 0:
+           _v = _v * -1;
+        
+        if self.direction > 0:
+           #vertical alignment
+           if self.type > 0:
+              #R type
+	      _v = _v * -1	
+           self.point_3 = [self.point_2[0]+_v,self.point_2[1]]
+        else:
+	   #horizontal alignment
+           if self.type > 1:
+              #L type
+	      _v = _v * -1
+           self.point_3 = [self.point_2[0],self.point_2[1]+_v]
+        self.points = [self.point_1,self.origin,self.point_2,self.point_3]
+
 class LRectangleR(LRectangle):
     def __init__(self):
         self.type    = 0
-  	self.origin  = []#= [4,4]
-        self.point_1 = []#= [3,4]
-        self.point_2 = []#= [5,4]
-        self.point_3 = []#= [5,5]
-        self.points  = []#  = [self.point_1,self.origin,self.point_2,self.point_3]
-        self.angle   = 0#= math.radians(90);
         LRectangle.__init__(self)
 
 class LRectangleL(LRectangle):
     def __init__(self):
         self.type    = 1
-#	 self.origin  = [4,4]
-#        self.point_1 = [3,4]
-#        self.point_2 = [5,4]
-#        self.point_3 = [3,5]
-#        self.points    = [self.point_1,self.origin,self.point_2,self.point_3]
-#        self.angle   = math.radians(90);
-        LRectangle.__init__(self,self.type)
+        LRectangle.__init__(self)
