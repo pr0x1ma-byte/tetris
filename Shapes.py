@@ -32,6 +32,7 @@ class Shapes(object):
               _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
               i+=1
           _temp.insert(i,[_orig[0],_orig[1]])
+          self.origin = _orig
           self.points = _temp
 
 
