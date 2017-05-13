@@ -34,7 +34,8 @@ from Line import Line
 from LRectangle import LRectangleR
 from LRectangle import LRectangleL
 from Triangle import Triangle
-obj = Triangle()
+from ZShape import ZShape
+obj = ZShapeR()
 while True:
       old = obj.getLine()
       count=0
@@ -51,17 +52,19 @@ from Line import Line
 from Triangle import Triangle
 from LRectangle import LRectangleR
 from LRectangle import LRectangleL
-print "Triangle"
+from ZShape import ZShapeR
+from ZShape import ZShapeL
+print "ZShapeR"
 print "------Original--------------------------"
-obj = Triangle();
+obj = ZShapeR();
 old = obj.getShape();
 print old
 print "------Rotated---------------------------"
 xy = obj.rotate()
 print xy
-print "LRectangleR"
+print "ZShapeL"
 print "------Original--------------------------"
-obj = LRectangleR();
+obj = ZShapeL();
 old = obj.getShape();
 print old
 print "------Rotated---------------------------"

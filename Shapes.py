@@ -1,5 +1,5 @@
 from Rotate import Rotate
-class Shapes:
+class Shapes(object):
       def __init__(self, origin, points, angle):
           self.origin  = origin
           self.points  = points
