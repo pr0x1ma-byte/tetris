@@ -1,5 +1,6 @@
 from Shapes import Shapes
 import math
+#change
 class ZShape(Shapes):
     def __init__(self):
         self.origin    = []
@@ -18,10 +19,28 @@ class ZShape(Shapes):
     def generate(self):
         line = line();
         self.origin  = line.origin
-        self.point_1 = line.point_1
+        self.point_1 = line.point_2
         if line.direction > 0:
            #vertical alignment
-           
+           if self.type > 0:
+              #R
+              self.point_2 = [self.origin[0]-1, self.origin[1]]
+	      self.point_3 = [self.point_2[0] , self.point_2[1]-1]
+           else:
+              #L
+              self.point_2 = [self.origin[0]+1, self.origin[1]]
+	      self.point_3 = [self.point_2[0] , self.origin[1]-1]
+         else:
+              #horizontal alignment
+           if self.type > 0:
+              #R
+              self.point_2 = [self.origin[0]   , self.origin[1]+1]
+              self.point_3 = [self.point_2[0]-1, self.point_2[1]] 
+           else:
+              #L
+              self.point_2 = [self.origin[0]   , self.origin[1]-1]
+              self.point_3 = [self.point_2[0]-1, self.point_2[1]]
+ 
    
 class ZShapeR(Shapes):
     def __init__(self):
