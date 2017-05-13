@@ -70,15 +70,16 @@ class Matrix():
                [  float(0)        , float(0 )      , float(1)] ]
 
     def toVectorAddOrigin(self, vec, p, _ox, _oy):
-                return [int(round( vec.x *p[0][0]
-                                   +vec.y *p[1][0]
-                                   +vec.w *p[2][0]))+_ox,
-                        int(round( vec.x *p[0][1]
-                                   +vec.y *p[1][1]
-                                   +vec.w *p[2][1]))+_oy,
-                        int(round( vec.x *p[0][2]
-                                   +vec.y *p[1][2]
-                                   +vec.w *p[2][2]))]
+        return [int(round( vec.x *p[0][0]
+                           +vec.y *p[1][0]
+                           +vec.w *p[2][0]))+_ox,
+                int(round( vec.x *p[0][1]
+                           +vec.y *p[1][1]
+                           +vec.w *p[2][1]))+_oy,
+                int(round( vec.x *p[0][2]
+                           +vec.y *p[1][2]
+                           +vec.w *p[2][2]))]
+
     def toVector(self, vec, p):
         return [int(round( vec.x *p[0][0]
                            +vec.y *p[1][0]

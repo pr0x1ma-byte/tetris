@@ -45,7 +45,7 @@ class ZShape(Shapes):
    
 class ZShapeR(ZShape):
     def __init__(self):
-        self.type = 0
+        self.type = 1
 #        self.origin  = [4,4]
 #        self.point_1 = [3,4]
 #        self.point_2 = [4,5]
@@ -57,7 +57,7 @@ class ZShapeR(ZShape):
 
 class ZShapeL(ZShape):
     def __init__(self):
-        self.type = 1
+        self.type = 0
 #        self.origin  = [4,4]
 #        self.point_1 = [3,4]
 #        self.point_2 = [4,3]
