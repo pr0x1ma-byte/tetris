@@ -12,12 +12,27 @@ class Shapes(object):
       def rotate(self):
           ox     = self.origin[0]
           oy     = self.origin[1]
-          count  = 0;
-          _xline = []
+          i      = 0;
+          _shape = []
           for j in self.points:
-              i = count;
               xy = self.rotater.getRotatedPoint(ox,oy,self.points[i][0],self.points[i][1],self.angle);
-              _xline.insert(i,[xy[0],xy[1]])
-              count+=1
-          self.line=_xline;
-          return _xline;
+              _shape.insert(i,[xy[0],xy[1]])
+              i+=1
+          self.points =_shape;
+          return _shape;
+
+      def shift(self):
+          i     = 0
+          _orig = [self.origin[0],self.origin[1]-1] #shift origin down
+          print self.points
+          self.points.remove(self.origin)
+          print self.points
+          _temp = []
+          for j in self.points:
+              _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
+              i+=1
+          _temp.insert(i,[_orig[0],_orig[1]])
+          self.points = _temp
+
+
+              

@@ -59,8 +59,9 @@ print "------Original--------------------------"
 obj = ZShapeR();
 old = obj.getShape();
 print old
-print "------Rotated---------------------------"
-xy = obj.rotate()
+print "------Shifted---------------------------"
+obj.shift()
+xy = obj.getShape()
 print xy
 print "ZShapeL"
 print "------Original--------------------------"
