@@ -1,4 +1,4 @@
-'''
+
 from random import randint
 import unicornhat as unicorn
 import time
@@ -8,25 +8,34 @@ import tty
 import threading
 import math
 from pyfiglet import figlet_format
-#unicorn.brightness(.5)
+from Line import Line
+from LRectangle import LRectangleR
+from LRectangle import LRectangleL
+from Square import Square
+from Triangle import Triangle
+unicorn.brightness(.5)
 k=-1
 unicorn.set_layout(unicorn.AUTO)
 unicorn.rotation(0)
 width,height=unicorn.get_shape()
-
-obj = Line()
+print '---height and width---'
+print str(width) +" "+str(height)
+obj = LRectangleR()
+unicorn.set_pixel(0,0,255,0,255);
+unicorn.show()
+time.sleep(2)
 while True:
-      old = obj.getLine()
-      count=0
-      for i in old:
-          unicorn.set_pixel(old[count][0],old[count][1],255,0,255);
-          count+=1
+      _shape  = obj.getShape()
+      print _shape
+      unicorn.clear()
+      obj.draw()
       unicorn.show()
       time.sleep(1)
-      unicorn.clear()
+      #unicorn.clear()
       obj.rotate();
-'''
-from math import radians,cos,sin
+      obj.shift();
+
+#from math import radians,cos,sin
 
 
 '''
@@ -46,7 +55,7 @@ while True:
       time.sleep(1)
       unicorn.clear()
       obj.rotate();
-'''
+
 
 from Line import Line
 from Triangle import Triangle
@@ -71,7 +80,7 @@ print old
 print "------Rotated---------------------------"
 xy = obj.rotate()
 print xy
-'''
+
 print "------Original Now Rotated--------------"
 old = obj.getLine();
 print old
