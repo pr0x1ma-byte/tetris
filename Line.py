@@ -16,11 +16,11 @@ class Line(Shapes):
       def generate(self):
           if self.direction > 0:
              #vertical alignment
-	     self.origin  = [randint(0,8),8]
+	     self.origin  = [randint(2,6),8]
              self.point_1 = [self.origin[0],self.origin[1]-1]
  	     self.point_2 = [self.origin[0],self.origin[1]+1]         
           if self.direction < 1:
              #horizontal alignment
-             self.origin  = [randint(1,7),8]
+             self.origin  = [randint(2,6),8]
              self.point_1 = [self.origin[0]-1,self.origin[1]]
 	     self.point_2 = [self.origin[0]+1,self.origin[1]]

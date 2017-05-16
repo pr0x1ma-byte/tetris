@@ -1,3 +1,11 @@
+#from Line import Line
+#from LRectangle import LRectangleR
+#from LRectangle import LRectangleL
+#from Square import Square
+#from Triangle import Triangle
+#from ZShape import ZShapeR
+#from ZShape import ZShapeL
+
 from Rotate import Rotate
 import unicornhat as unicorn
 from random import randint
@@ -21,6 +29,9 @@ class Shapes(object):
           blue  = randint(0,255)
           green = randint(0,255)
           color = [red,blue,green]
+          print "---------COLOR----------"
+          print color
+          print "------------------------"
           return color
       
       def getShape(self):
@@ -59,3 +70,7 @@ class Shapes(object):
                  unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
               i+=1
               
+#      def getNewObject(self):
+#    	  val = randint(0,6);
+#          obj = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
+#    	  return obj[val]
