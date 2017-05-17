@@ -29,9 +29,6 @@ class Shapes(object):
           blue  = randint(0,255)
           green = randint(0,255)
           color = [red,blue,green]
-          print "---------COLOR----------"
-          print color
-          print "------------------------"
           return color
       
       def getShape(self):
@@ -47,9 +44,10 @@ class Shapes(object):
               _shape.insert(i,[xy[0],xy[1]])
               i+=1
           self.points =_shape;
+#          self.drawShiftRotate()
           return _shape;
 
-      def shift(self):
+      def shiftDown(self):
           i     = 0
           _orig = [self.origin[0],self.origin[1]-1] #shift origin down
           self.points.remove(self.origin)
@@ -60,8 +58,47 @@ class Shapes(object):
           _temp.insert(i,[_orig[0],_orig[1]])
           self.origin = _orig
           self.points = _temp
+          self.drawShiftRotate()
+
+      def shiftLeft(self):
+          i     = 0
+          _orig = [self.origin[0]+1,self.origin[1]] #shift origin left
+          self.points.remove(self.origin)
+          _temp = []
+          for j in self.points:
+              _temp.insert(i,[self.points[i][0]+1,self.points[i][1]])
+              i+=1
+          _temp.insert(i,[_orig[0],_orig[1]])
+          self.origin = _orig
+          self.points = _temp
+	  self.drawShiftRotate()
+
+      def shiftRight(self):
+          i     = 0
+          _orig = [self.origin[0]-1,self.origin[1]] #shift origin right
+          self.points.remove(self.origin)
+          _temp = []
+          for j in self.points:
+              _temp.insert(i,[self.points[i][0]-1,self.points[i][1]])
+              i+=1
+          _temp.insert(i,[_orig[0],_orig[1]])
+          self.origin = _orig
+          self.points = _temp
+#          self.drawShiftRotate()
+
+      def drawShiftRotate(self):
+	  unicorn.clear()
+          i  = 0
+          for j in self.points:
+              _x = self.points[i][0]
+              _y = self.points[i][1]
+              if _x <= height-1 and _y <=height-1 and _x >= 0 and _y >= 0:
+                 unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
+              i+=1
+          unicorn.show()
 
       def draw(self):
+          unicorn.clear()
 	  i  = 0
           for j in self.points:
               _x = self.points[i][0]
@@ -69,6 +106,7 @@ class Shapes(object):
 	      if _x <= height-1 and _y <=height-1 and _x >= 0 and _y >= 0:
                  unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
               i+=1
+	  unicorn.show()
               
 #      def getNewObject(self):
 #    	  val = randint(0,6);

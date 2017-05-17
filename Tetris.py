@@ -28,19 +28,26 @@ def getNewObject():
           val = randint(0,6);
           o   = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
           return o[val]
+def shift():
+    threading.Timer(.5, shift).start()
+
+
 while True:
-    #_shape  = obj.getShape()
-    #print _shape
+    _shape  = obj.getShape()
+    print _shape
     if i > 8:
        i=0
        obj = getNewObject()
-    unicorn.clear()
+#    unicorn.clear()
     obj.draw()
-    unicorn.show()
+#    unicorn.show()
     time.sleep(.5)
     #unicorn.clear()
-    obj.rotate();
-    obj.shift();
+#    obj.rotate();
+    obj.shiftDown();
+    time.sleep(.5)
+    obj.shiftLeft();
+#    obj.shiftRight();
     i+=1
 
 #from math import radians,cos,sin
@@ -53,6 +60,9 @@ from LRectangle import LRectangleL
 from Triangle import Triangle
 from ZShape import ZShape
 obj = ZShapeR()
+def shift():
+    threading.Timer(5.0, shift).start()
+    
 while True:
       old = obj.getLine()
       count=0
