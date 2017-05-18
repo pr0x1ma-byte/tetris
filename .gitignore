@@ -3,3 +3,4 @@
 *.iml
 *.DS_STORE
 *.py~
+*.py.save
