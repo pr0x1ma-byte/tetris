@@ -108,7 +108,4 @@ class Shapes(object):
               i+=1
 	  unicorn.show()
               
-#      def getNewObject(self):
-#    	  val = randint(0,6);
-#          obj = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
-#    	  return obj[val]
+
