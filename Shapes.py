@@ -60,6 +60,20 @@ class Shapes(object):
           self.points = _temp
           self.drawShiftRotate()
 
+      def detectDown(self):
+	  i     = 0
+          _orig = [self.origin[0],self.origin[1]-1] #shift origin down
+#          self.points.remove(self.origin)
+          _temp = []
+          for j in self.points:
+              _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
+              i+=1
+          _temp.insert(i,[_orig[0],_orig[1]])
+'check generated temp points against board '
+#          self.origin = _orig
+#          self.points = _temp
+#          self.drawShiftRotate()
+
       def shiftLeft(self):
           i     = 0
           _orig = [self.origin[0]+1,self.origin[1]] #shift origin left

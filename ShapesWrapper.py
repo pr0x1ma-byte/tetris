@@ -6,6 +6,7 @@ from Triangle import Triangle
 from ZShape import ZShapeR
 from ZShape import ZShapeL
 from random import randint
+from Board import Board
 import threading
 import time
 
@@ -15,6 +16,7 @@ class ShapesWrapper():
           self.shape = []
           self.getNewObject()
           self.exit = False
+	  self.board = Board()
 
       def getNewObject(self):
           val = randint(0,6);
@@ -26,7 +28,8 @@ class ShapesWrapper():
              if self.shiftIndex > 7:
                 self.shiftIndex = 0
                 self.getNewObject()
-             self.shape.shiftDown()
+             self.board.detect(self.shape);
+#             self.shape.shiftDown()
              self.shiftIndex+=1
              threading.Timer(1, self.shift).start()
 
