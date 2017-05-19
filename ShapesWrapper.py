@@ -28,18 +28,9 @@ class ShapesWrapper():
              if self.shiftIndex > 7:
                 self.shiftIndex = 0
                 self.getNewObject()
-             self.board.detect(self.shape);
-#             self.shape.shiftDown()
-             self.shiftIndex+=1
+#             self.board.detect(self.shape);
+             self.shape.shiftDown(self)
              threading.Timer(1, self.shift).start()
 
       def start(self):
           self.shift()
-          while not self.exit:
-#               self.shape.rotate();
-                self.shape.draw()
-                time.sleep(.2)
-#      def getNewObject(self):
-#         val = randint(0,6);
-#          obj = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
-#         return obj[val]

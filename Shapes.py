@@ -14,7 +14,7 @@ import time
 unicorn.set_layout(unicorn.AUTO)
 unicorn.rotation(0)
 width,height=unicorn.get_shape()
-unicorn.brightness(.5)
+unicorn.brightness(.6)
 
 class Shapes(object):
       def __init__(self, origin, points, angle):
@@ -44,10 +44,11 @@ class Shapes(object):
               _shape.insert(i,[xy[0],xy[1]])
               i+=1
           self.points =_shape;
-#          self.drawShiftRotate()
-          return _shape;
+          self.drawShiftRotate()
+#          return _shape;
 
-      def shiftDown(self):
+      def shiftDown(self, shape):
+	  shape.shiftIndex+=1
           i     = 0
           _orig = [self.origin[0],self.origin[1]-1] #shift origin down
           self.points.remove(self.origin)
@@ -69,7 +70,7 @@ class Shapes(object):
               _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
               i+=1
           _temp.insert(i,[_orig[0],_orig[1]])
-'check generated temp points against board '
+#'check generated temp points against board '
 #          self.origin = _orig
 #          self.points = _temp
 #          self.drawShiftRotate()
@@ -98,7 +99,7 @@ class Shapes(object):
           _temp.insert(i,[_orig[0],_orig[1]])
           self.origin = _orig
           self.points = _temp
-#          self.drawShiftRotate()
+          self.drawShiftRotate()
 
       def drawShiftRotate(self):
 	  unicorn.clear()

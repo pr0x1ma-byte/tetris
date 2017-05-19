@@ -3,7 +3,7 @@ class Board():
 	  self.dummy=0;
 	  self.board = self.identity();
 
-      def detect(self,shape):
+#      def detect(self,shape):
           
 	  	  
       def freeze(self,points):
