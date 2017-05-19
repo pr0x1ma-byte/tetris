@@ -17,7 +17,7 @@ class Observer():
       def up(self):
 	  self.shapesWrapper.shape.rotate();
       def down(self):
-	  self.shapesWrapper.shape.shiftDown(self.shapesWrapper);
+	  self.shapesWrapper.shape.shiftDown(self.shapesWrapper,self.shapesWrapper.board);
 #	  self.shapesWrapper.shiftIndex+=1
       def right(self):
 	  self.shapesWrapper.shape.shiftRight();

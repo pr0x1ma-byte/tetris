@@ -47,33 +47,48 @@ class Shapes(object):
           self.drawShiftRotate()
 #          return _shape;
 
-      def shiftDown(self, shape):
-	  shape.shiftIndex+=1
-          i     = 0
-          _orig = [self.origin[0],self.origin[1]-1] #shift origin down
-          self.points.remove(self.origin)
-          _temp = []
-          for j in self.points:
-              _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
-              i+=1
-          _temp.insert(i,[_orig[0],_orig[1]])
-          self.origin = _orig
-          self.points = _temp
+      def shiftDown(self, shapeWrapper, board):
+	  _data   = self.detectDown()
+	  _points = _data[0]
+ 	  _origin = _data[1]
+	  _failed = _data[2]
+	  if not _failed:
+	     self.origin = _origin
+	     self.points = _points
+	     shapeWrapper.shiftIndex+=1
+          else:
+             board.freeze(self)
+	     board.draw()
+	     shapeWrapper.shiftIndex=9 #? trigger new object on next pass
           self.drawShiftRotate()
-
-      def detectDown(self):
-	  i     = 0
-          _orig = [self.origin[0],self.origin[1]-1] #shift origin down
+	     
+#	  shape.shiftIndex+=1
+#          i     = 0
+#          _orig = [self.origin[0],self.origin[1]-1] #shift origin down
 #          self.points.remove(self.origin)
-          _temp = []
-          for j in self.points:
-              _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
-              i+=1
-          _temp.insert(i,[_orig[0],_orig[1]])
-#'check generated temp points against board '
+#          _temp = []
+#          for j in self.points:
+#              _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
+#              i+=1
+#          _temp.insert(i,[_orig[0],_orig[1]])
 #          self.origin = _orig
 #          self.points = _temp
 #          self.drawShiftRotate()
+
+      def detectDown(self):
+	  i       = 0
+	  _points = self.points
+          _orig   = [self.origin[0],self.origin[1]-1] 
+          _temp   = []
+          _failed = False
+	  for j in _points: #contains origin
+	      _x = _points[i][0]
+              _y = _points[i][1] -1
+              if _y < 0:
+	         _failed = True 
+              _temp.insert(i,[_x,_y])
+              i+=1
+	  return [_temp,_orig,_failed]
 
       def shiftLeft(self):
           i     = 0

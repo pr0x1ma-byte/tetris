@@ -29,7 +29,7 @@ class ShapesWrapper():
                 self.shiftIndex = 0
                 self.getNewObject()
 #             self.board.detect(self.shape);
-             self.shape.shiftDown(self)
+             self.shape.shiftDown(self,self.board)
              threading.Timer(1, self.shift).start()
 
       def start(self):
