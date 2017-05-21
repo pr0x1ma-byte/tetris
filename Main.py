@@ -18,11 +18,10 @@ class Observer():
 	  self.shapesWrapper.shape.rotate();
       def down(self):
 	  self.shapesWrapper.shape.shiftDown(self.shapesWrapper,self.shapesWrapper.board);
-#	  self.shapesWrapper.shiftIndex+=1
       def right(self):
-	  self.shapesWrapper.shape.shiftRight();
+	  self.shapesWrapper.shape.shiftRight(self.shapesWrapper,self.shapesWrapper.board);
       def left(self):
-	  self.shapesWrapper.shape.shiftLeft();
+	  self.shapesWrapper.shape.shiftLeft(self.shapesWrapper,self.shapesWrapper.board);
       def begin(self):
 #	  try:
 	  self.user.start();

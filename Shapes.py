@@ -17,7 +17,8 @@ width,height=unicorn.get_shape()
 unicorn.brightness(.6)
 
 class Shapes(object):
-      def __init__(self, origin, points, angle):
+      def __init__(self, origin, points, angle, auto):
+	  self.autoDownShift = auto
           self.origin  = origin
           self.points  = points
           self.angle   = angle
@@ -47,35 +48,35 @@ class Shapes(object):
           self.drawShiftRotate()
 #          return _shape;
 
-      def shiftDown(self, shapeWrapper, board):
-	  _data   = self.detectDown()
-	  _points = _data[0]
- 	  _origin = _data[1]
-	  _failed = _data[2]
-	  if not _failed:
-	     self.origin = _origin
-	     self.points = _points
-	     shapeWrapper.shiftIndex+=1
+      def shiftDecisionDown(self, _data, shapeWrapper, board):
+    	  _points = _data[0]
+          _origin = _data[1]
+          _failed = _data[2]
+          if not _failed:
+             self.origin = _origin
+             self.points = _points
+             shapeWrapper.shiftIndex+=1
           else:
              board.freeze(self)
-	     board.draw()
-	     shapeWrapper.shiftIndex=9 #? trigger new object on next pass
+             board.draw()
+             shapeWrapper.shiftIndex=9 #? trigger new object on next pass
           self.drawShiftRotate()
-	     
-#	  shape.shiftIndex+=1
-#          i     = 0
-#          _orig = [self.origin[0],self.origin[1]-1] #shift origin down
-#          self.points.remove(self.origin)
-#          _temp = []
-#          for j in self.points:
-#              _temp.insert(i,[self.points[i][0],self.points[i][1]-1])
-#              i+=1
-#          _temp.insert(i,[_orig[0],_orig[1]])
-#          self.origin = _orig
-#          self.points = _temp
-#          self.drawShiftRotate()
 
-      def detectDown(self):
+      def shiftDecision(self, _data, shapeWrapper, board): 
+          _points = _data[0]
+          _origin = _data[1]
+          _failed = _data[2]
+          if not _failed:
+             self.origin = _origin
+             self.points = _points
+          else:
+             board.draw()
+          self.drawShiftRotate()
+
+      def shiftDown(self, shapeWrapper, board):
+	  self.shiftDecisionDown(self.detectDownCollision(),shapeWrapper, board)
+
+      def detectDownCollision(self):
 	  i       = 0
 	  _points = self.points
           _orig   = [self.origin[0],self.origin[1]-1] 
@@ -88,33 +89,43 @@ class Shapes(object):
 	         _failed = True 
               _temp.insert(i,[_x,_y])
               i+=1
+          self.autoDownShift = True  #enable down shift increment check
 	  return [_temp,_orig,_failed]
-
-      def shiftLeft(self):
-          i     = 0
-          _orig = [self.origin[0]+1,self.origin[1]] #shift origin left
-          self.points.remove(self.origin)
-          _temp = []
-          for j in self.points:
-              _temp.insert(i,[self.points[i][0]+1,self.points[i][1]])
+      def detectLeftCollision(self):
+	  i       = 0
+          _points = self.points
+          _orig   = [self.origin[0]+1,self.origin[1]]
+          _temp   = []
+          _failed = False
+          for j in _points: #contains origin
+              _x = _points[i][0] + 1
+              _y = _points[i][1]
+              if _x > width-1:
+                 _failed = True
+              _temp.insert(i,[_x,_y])
               i+=1
-          _temp.insert(i,[_orig[0],_orig[1]])
-          self.origin = _orig
-          self.points = _temp
-	  self.drawShiftRotate()
+          return [_temp,_orig,_failed]
 
-      def shiftRight(self):
-          i     = 0
-          _orig = [self.origin[0]-1,self.origin[1]] #shift origin right
-          self.points.remove(self.origin)
-          _temp = []
-          for j in self.points:
-              _temp.insert(i,[self.points[i][0]-1,self.points[i][1]])
+      def shiftLeft(self, shapeWrapper, board):
+	  self.shiftDecision(self.detectLeftCollision(), shapeWrapper, board)
+
+      def detectRightCollision(self):
+          i       = 0
+          _points = self.points
+          _orig   = [self.origin[0]-1,self.origin[1]]
+          _temp   = []
+          _failed = False
+          for j in _points: #contains origin
+              _x = _points[i][0] - 1
+              _y = _points[i][1]
+              if _x < 0:
+                 _failed = True
+              _temp.insert(i,[_x,_y])
               i+=1
-          _temp.insert(i,[_orig[0],_orig[1]])
-          self.origin = _orig
-          self.points = _temp
-          self.drawShiftRotate()
+          return [_temp,_orig,_failed]
+
+      def shiftRight(self, shapeWrapper, board):
+          self.shiftDecision(self.detectRightCollision(), shapeWrapper, board)
 
       def drawShiftRotate(self):
 	  unicorn.clear()

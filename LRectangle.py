@@ -3,15 +3,17 @@ from Line import Line
 import math
 class  LRectangle(Shapes):
     def __init__(self):
-        self.origin    = []
-        self.point_1   = []
-        self.point_2   = []
-        self.point_3   = []
-        self.points    = []
-        self.angle     = math.radians(90);
-        self.direction = 0
+	self.autoDownShift = False
+        self.origin        = []
+        self.point_1       = []
+        self.point_2       = []
+        self.point_3       = []
+        self.points        = []
+        self.angle         = math.radians(90);
+        self.direction     = 0
         self.generate()
-	Shapes.__init__(self,self.origin, self.points,self.angle)		
+	Shapes.__init__(self,self.origin,self.points,self.angle,self.autoDownShift)
+		
     def generate(self):
         line = Line();
         self.origin  = line.origin

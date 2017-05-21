@@ -3,15 +3,16 @@ from random import randint
 import math
 class Line(Shapes):
       def __init__(self):
-          self.origin  =[]
-          self.point_1 =[]
-          self.point_2 =[]
-	  self.direction = randint(0,1)
+	  self.autoDownShift = False
+          self.origin        =[]
+          self.point_1 	     =[]
+          self.point_2 	     =[]
+	  self.direction     = randint(0,1)
           self.generate();
 
-	  self.points    = [self.point_1,self.origin,self.point_2]
-          self.angle   = math.radians(90);
-          Shapes.__init__(self,self.origin,self.points,self.angle)
+	  self.points        = [self.point_1,self.origin,self.point_2]
+          self.angle         = math.radians(90);
+          Shapes.__init__(self,self.origin,self.points,self.angle,self.autoDownShift)
       
       def generate(self):
           if self.direction > 0:

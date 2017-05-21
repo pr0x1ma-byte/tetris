@@ -3,14 +3,16 @@ from Line import Line
 import math
 class Square(Shapes):
     def __init__(self):
-        self.origin  = []
-        self.point_1 = []
-        self.point_2 = []
-        self.point_3 = []
-        self.angle   = math.radians(90)
+	self.autoDownShift = False
+        self.origin        = []
+        self.point_1       = []
+        self.point_2       = []
+        self.point_3       = []
+        self.angle         = math.radians(90)
         self.generate()
-        self.points  = [self.origin, self.point_1, self.point_2, self.point_3]
-        Shapes.__init__(self,self.origin, self.points,self.angle)
+        self.points        = [self.origin, self.point_1, self.point_2, self.point_3]
+        Shapes.__init__(self,self.origin,self.points,self.angle,self.autoDownShift)
+
     def rotate(self):
         return self.points
 

@@ -4,14 +4,15 @@ import math
 #change
 class ZShape(Shapes):
     def __init__(self):
-        self.origin    = []
-        self.point_1   = []
-        self.point_2   = []
-        self.point_3   = []
-        self.angle     = math.radians(90)
+	self.autoDownShift = False
+        self.origin        = []
+        self.point_1       = []
+        self.point_2       = []
+        self.point_3       = []
+        self.angle         = math.radians(90)
         self.generate()
-        self.points    = [self.point_1,self.origin,self.point_2,self.point_3]
-        Shapes.__init__(self,self.origin,self.points,self.angle)
+        self.points        = [self.point_1,self.origin,self.point_2,self.point_3]
+        Shapes.__init__(self,self.origin,self.points,self.angle,self.autoDownShift)
     def rotate(self):
         _points = super(ZShape,self).rotate();
         self.angle = self.angle * -1;
