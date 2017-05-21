@@ -23,6 +23,7 @@ class Shapes(object):
           self.points  = points
           self.angle   = angle
           self.rotater = Rotate()
+	  self.board   = []
           self.color   = self.genColor()
 
       def genColor(self):
@@ -48,7 +49,7 @@ class Shapes(object):
           self.drawShiftRotate()
 #          return _shape;
 
-      def shiftDecisionDown(self, _data, shapeWrapper, board):
+      def shiftDecisionDown(self, _data, shapeWrapper):
     	  _points = _data[0]
           _origin = _data[1]
           _failed = _data[2]
@@ -57,24 +58,21 @@ class Shapes(object):
              self.points = _points
              shapeWrapper.shiftIndex+=1
           else:
-             board.freeze(self)
-             board.draw()
+             self.board.freeze(self)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
           self.drawShiftRotate()
 
-      def shiftDecision(self, _data, shapeWrapper, board): 
+      def shiftDecision(self, _data, shapeWrapper): 
           _points = _data[0]
           _origin = _data[1]
           _failed = _data[2]
           if not _failed:
              self.origin = _origin
              self.points = _points
-          else:
-             board.draw()
           self.drawShiftRotate()
 
-      def shiftDown(self, shapeWrapper, board):
-	  self.shiftDecisionDown(self.detectDownCollision(),shapeWrapper, board)
+      def shiftDown(self, shapeWrapper):
+	  self.shiftDecisionDown(self.detectDownCollision(),shapeWrapper)
 
       def detectDownCollision(self):
 	  i       = 0
@@ -106,8 +104,8 @@ class Shapes(object):
               i+=1
           return [_temp,_orig,_failed]
 
-      def shiftLeft(self, shapeWrapper, board):
-	  self.shiftDecision(self.detectLeftCollision(), shapeWrapper, board)
+      def shiftLeft(self, shapeWrapper):
+	  self.shiftDecision(self.detectLeftCollision(), shapeWrapper)
 
       def detectRightCollision(self):
           i       = 0
@@ -124,8 +122,8 @@ class Shapes(object):
               i+=1
           return [_temp,_orig,_failed]
 
-      def shiftRight(self, shapeWrapper, board):
-          self.shiftDecision(self.detectRightCollision(), shapeWrapper, board)
+      def shiftRight(self, shapeWrapper):
+          self.shiftDecision(self.detectRightCollision(), shapeWrapper)
 
       def drawShiftRotate(self):
 	  unicorn.clear()
@@ -136,6 +134,7 @@ class Shapes(object):
               if _x <= height-1 and _y <=height-1 and _x >= 0 and _y >= 0:
                  unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
               i+=1
+          self.board.draw()
           unicorn.show()
 
       def draw(self):
@@ -149,4 +148,5 @@ class Shapes(object):
               i+=1
 	  unicorn.show()
               
-
+      def setBoard(self,board):
+          self.board = board

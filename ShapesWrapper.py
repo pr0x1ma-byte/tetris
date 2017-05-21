@@ -14,14 +14,15 @@ class ShapesWrapper():
       def __init__(self):
           self.shiftIndex = 0
           self.shape = []
+	  self.board = Board()
           self.getNewObject()
           self.exit = False
-	  self.board = Board()
 
       def getNewObject(self):
           val = randint(0,6);
           o   = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
           self.shape = o[val]
+          self.shape.setBoard(self.board)
 
       def shift(self):
           if not self.exit:
@@ -29,8 +30,9 @@ class ShapesWrapper():
                 self.shiftIndex = 0
                 self.getNewObject()
 #             self.board.detect(self.shape);
-             self.shape.shiftDown(self,self.board)
+             self.shape.shiftDown(self)
              threading.Timer(1, self.shift).start()
 
       def start(self):
           self.shift()
+

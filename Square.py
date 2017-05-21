@@ -14,6 +14,7 @@ class Square(Shapes):
         Shapes.__init__(self,self.origin,self.points,self.angle,self.autoDownShift)
 
     def rotate(self):
+        super(Square, self).drawShiftRotate()
         return self.points
 
     def generate(self):

@@ -15,7 +15,7 @@ class Board():
 	      self.board[points[i][0]][points[i][1]]      = 1
 	      self.boardColor[points[i][0]][points[i][1]] = shape.color
 	      i+=1
-          
+
       def identity(self):
           return [ [0,0,0,0,0,0,0,0],
 		   [0,0,0,0,0,0,0,0],
@@ -37,11 +37,10 @@ class Board():
                    [[],[],[],[],[],[],[],[]]]
   	
       def draw(self):
-	  i = 0
-          for j in self.boardColor:
-	      _x = self.board[i][0]
-	      _y = self.board[i][1]
-		
- 	      if _x != [] and _y != []:
-	         unicorn.set_pixel(_x,_y,255,255,255);
-	      #unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
+#          unicorn.clear()
+          for j in range(0,7):
+	      for k in range(0,7):
+	          _c = self.boardColor[j][k]
+	          if _c != []:
+	             unicorn.set_pixel(j,k,_c[0],_c[1],_c[2]);
+#          unicorn.show()

@@ -17,11 +17,11 @@ class Observer():
       def up(self):
 	  self.shapesWrapper.shape.rotate();
       def down(self):
-	  self.shapesWrapper.shape.shiftDown(self.shapesWrapper,self.shapesWrapper.board);
+	  self.shapesWrapper.shape.shiftDown(self.shapesWrapper);
       def right(self):
-	  self.shapesWrapper.shape.shiftRight(self.shapesWrapper,self.shapesWrapper.board);
+	  self.shapesWrapper.shape.shiftRight(self.shapesWrapper);
       def left(self):
-	  self.shapesWrapper.shape.shiftLeft(self.shapesWrapper,self.shapesWrapper.board);
+	  self.shapesWrapper.shape.shiftLeft(self.shapesWrapper);
       def begin(self):
 #	  try:
 	  self.user.start();
