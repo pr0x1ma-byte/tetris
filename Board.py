@@ -38,8 +38,8 @@ class Board():
   	
       def draw(self):
 #          unicorn.clear()
-          for j in range(0,7):
-	      for k in range(0,7):
+          for j in range(0,8):
+	      for k in range(0,8):
 	          _c = self.boardColor[j][k]
 	          if _c != []:
 	             unicorn.set_pixel(j,k,_c[0],_c[1],_c[2]);

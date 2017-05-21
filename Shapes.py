@@ -57,6 +57,9 @@ class Shapes(object):
              self.origin = _origin
              self.points = _points
              shapeWrapper.shiftIndex+=1
+	     if shapeWrapper.shiftIndex > 7:
+#	        print 'weird scenario...' + str(shapeWrapper.shiftIndex)
+                self.board.freeze(self)
           else:
              self.board.freeze(self)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
