@@ -60,10 +60,11 @@ class Shapes(object):
 	     if shapeWrapper.shiftIndex > 7:
 #	        print 'weird scenario...' + str(shapeWrapper.shiftIndex)
                 self.board.freeze(self)
+             self.drawShiftRotate()
           else:
              self.board.freeze(self)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
-          self.drawShiftRotate()
+#          self.drawShiftRotate()
 
       def shiftDecision(self, _data, shapeWrapper): 
           _points = _data[0]
