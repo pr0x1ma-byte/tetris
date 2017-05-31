@@ -53,7 +53,7 @@ class Shapes(object):
     	  _points = _data[0]
           _origin = _data[1]
           _failed = _data[2]
-          if not _failed:
+          if not _failed[0] and not _failed[1]:
              self.origin = _origin
              self.points = _points
              shapeWrapper.shiftIndex+=1
@@ -61,7 +61,11 @@ class Shapes(object):
 #	        print 'weird scenario...' + str(shapeWrapper.shiftIndex)
                 self.board.freeze(self)
              self.drawShiftRotate()
-          else:
+         # elif _failed['other']:
+	 #      self.board.freeze(self)
+	 #      shapeWrappe.shiftIndex=9
+	 # el
+	  else:
              self.board.freeze(self)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
 #          self.drawShiftRotate()
@@ -83,12 +87,19 @@ class Shapes(object):
 	  _points = self.points
           _orig   = [self.origin[0],self.origin[1]-1] 
           _temp   = []
-          _failed = False
+         # _failed = False
+          _failed = [False,False]#{bottom:False,other:False}
 	  for j in _points: #contains origin
 	      _x = _points[i][0]
               _y = _points[i][1] -1
-              if _y < 0:
-	         _failed = True 
+	      _v = self.board.checkPointsCollision(_x,_y)
+              if _v['bottom']:
+	         _failed[0] = True
+#              if _v['top']:
+# 		 _failed['top'] = True
+              if _v['other']:
+	         _failed[1] = True
+	       
               _temp.insert(i,[_x,_y])
               i+=1
           self.autoDownShift = True  #enable down shift increment check

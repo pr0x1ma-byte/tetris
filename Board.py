@@ -4,9 +4,6 @@ class Board():
 	  self.dummy=0;
 	  self.board      = self.identity();
 	  self.boardColor = self.identityColor();
-
-#      def detect(self,shape):
-          
 	  	  
       def freeze(self,shape):
           i = 0
@@ -61,7 +58,6 @@ class Board():
 	         _val = j
                  break
 
-	  print _val
 	  return _val
           
       def draw(self):
@@ -72,7 +68,6 @@ class Board():
 	             unicorn.set_pixel(j,k,_c[0],_c[1],_c[2]);
              
       def shiftAndClear(self, _x):
-#	   r = len(self.board) 
 	   for j in range(0,8):
 	       _a = self.board[j]
 	       _b = self.boardColor[j]
@@ -82,14 +77,6 @@ class Board():
                _b.insert(6,[])
 	       self.board[j]      = _a
 	       self.boardColor[j] = _b
-#	   unicorn.clear()
-#           self.draw()
-#	   unicorn.show()		                   
-      def getNewRow(self):
-          return [0,0,0,0,0,0,0,0]
-	
-      def getNewRowColor(self):
-	  return [[],[],[],[],[],[],[],[]]
 
       def sumX(self):
 	  _b = self.board
@@ -101,6 +88,19 @@ class Board():
 		   [ _b[0][5] + _b[1][5] + _b[2][5] + _b[3][5] + _b[4][5] + _b[5][5] + _b[6][5] + _b[7][5]], 
 	  	   [ _b[0][6] + _b[1][6] + _b[2][6] + _b[3][6] + _b[4][6] + _b[5][6] + _b[6][6] + _b[7][6]], 
 		   [ _b[0][7] + _b[1][7] + _b[2][7] + _b[3][7] + _b[4][7] + _b[5][7] + _b[6][7] + _b[7][7]], ]
+
+      def checkPointsCollision(self,_x,_y):
+	  _failed = {'top':False,'bottom':False,'other':False}
+	  if _y < 0:
+	     _failed['bottom'] = True
+	  else:
+	     if _y > 7:
+	        _failed['top'] = True
+	     else:
+	         _v = self.board[_x][_y]
+	         if _v > 0:
+                    _failed['other'] = True
+	  return _failed          	
 
 #      def sumR(self):
 #          _b = self.board
