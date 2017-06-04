@@ -41,12 +41,19 @@ class Shapes(object):
           oy     = self.origin[1]
           i      = 0;
           _shape = []
+	  _failed = False
           for j in self.points:
               xy = self.rotater.getRotatedPoint(ox,oy,self.points[i][0],self.points[i][1],self.angle);
-              _shape.insert(i,[xy[0],xy[1]])
+              _v = self.board.checkPointsCollision(xy[0],xy[1])
+	      if xy[0] > 7 or xy[0] < 0 or xy[1] < 0:
+	         _failed = True
+	      if _v['other']:
+	         _failed = True 
+	      _shape.insert(i,[xy[0],xy[1]])
               i+=1
-          self.points =_shape;
-          self.drawShiftRotate()
+	  if not _failed:
+             self.points =_shape;
+             self.drawShiftRotate()
 #          return _shape;
 
       def shiftDecisionDown(self, _data, shapeWrapper):
@@ -113,8 +120,11 @@ class Shapes(object):
           for j in _points: #contains origin
               _x = _points[i][0] + 1
               _y = _points[i][1]
+	      _v = self.board.checkPointsCollision(_x,_y)
               if _x > width-1:
                  _failed = True
+	      if _v['other'] or _v['side']:
+	         _failed = True
               _temp.insert(i,[_x,_y])
               i+=1
           return [_temp,_orig,_failed]
@@ -131,8 +141,11 @@ class Shapes(object):
           for j in _points: #contains origin
               _x = _points[i][0] - 1
               _y = _points[i][1]
+	      _v = self.board.checkPointsCollision(_x,_y)
               if _x < 0:
                  _failed = True
+	      if _v['other'] or _v['side']:
+	         _failed = True
               _temp.insert(i,[_x,_y])
               i+=1
           return [_temp,_orig,_failed]

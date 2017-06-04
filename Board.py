@@ -90,16 +90,18 @@ class Board():
 		   [ _b[0][7] + _b[1][7] + _b[2][7] + _b[3][7] + _b[4][7] + _b[5][7] + _b[6][7] + _b[7][7]], ]
 
       def checkPointsCollision(self,_x,_y):
-	  _failed = {'top':False,'bottom':False,'other':False}
+	  _failed = {'top':False,'bottom':False,'side':False,'other':False}
 	  if _y < 0:
 	     _failed['bottom'] = True
 	  else:
 	     if _y > 7:
 	        _failed['top'] = True
+	     elif _x > 7 or _x < 0:
+	        _failed['side'] = True
 	     else:
-	         _v = self.board[_x][_y]
-	         if _v > 0:
-                    _failed['other'] = True
+	        _v = self.board[_x][_y]
+	        if _v > 0:
+                   _failed['other'] = True
 	  return _failed          	
 
 #      def sumR(self):
