@@ -6,10 +6,11 @@ import sys
 class Observer():
       def __init__(self):
 	  self.exit = False;
-	  self.shapesWrapper = ShapesWrapper();
+	  self.shapesWrapper = ShapesWrapper(self);
           self.user = User(self);
 	  self.bodyCollision=False
       def end(self):
+	  print 'exiting ...'
 	  self.user.exit = True;
           self.shapesWrapper.exit = True;
 	  os.system('stty sane');

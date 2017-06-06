@@ -94,8 +94,10 @@ class Board():
 	  if _y < 0:
 	     _failed['bottom'] = True
 	  else:
-	     if _y > 7:
+	     if _y > 6:
 	        _failed['top'] = True
+	    #    if _v > 0:
+	    #       _failed['other'] = True
 	     elif _x > 7 or _x < 0:
 	        _failed['side'] = True
 	     else:

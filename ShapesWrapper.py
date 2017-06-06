@@ -11,12 +11,13 @@ import threading
 import time
 
 class ShapesWrapper():
-      def __init__(self):
+      def __init__(self, observer):
           self.shiftIndex = 0
           self.shape = []
 	  self.board = Board()
           self.getNewObject()
           self.exit = False
+	  self.observer = observer
 
       def getNewObject(self):
           val = randint(0,6);

@@ -53,29 +53,26 @@ class Shapes(object):
               i+=1
 	  if not _failed:
              self.points =_shape;
-             self.drawShiftRotate()
+          self.drawShiftRotate()
 #          return _shape;
 
       def shiftDecisionDown(self, _data, shapeWrapper):
     	  _points = _data[0]
           _origin = _data[1]
           _failed = _data[2]
-          if not _failed[0] and not _failed[1]:
+	  if _failed[2]:
+	     shapeWrapper.observer.end()
+          elif not _failed[0] and not _failed[1]:
              self.origin = _origin
              self.points = _points
              shapeWrapper.shiftIndex+=1
 	     if shapeWrapper.shiftIndex > 7:
-#	        print 'weird scenario...' + str(shapeWrapper.shiftIndex)
                 self.board.freeze(self)
              self.drawShiftRotate()
-         # elif _failed['other']:
-	 #      self.board.freeze(self)
-	 #      shapeWrappe.shiftIndex=9
-	 # el
 	  else:
+	     print _points
              self.board.freeze(self)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
-#          self.drawShiftRotate()
 
       def shiftDecision(self, _data, shapeWrapper): 
           _points = _data[0]
@@ -95,21 +92,24 @@ class Shapes(object):
           _orig   = [self.origin[0],self.origin[1]-1] 
           _temp   = []
          # _failed = False
-          _failed = [False,False]#{bottom:False,other:False}
-	  for j in _points: #contains origin
+          _failed = [False,False,False]#{bottom:False,other:False}
+	  _top    = False
+          _other  = False
+          for j in _points: #contains origin
 	      _x = _points[i][0]
               _y = _points[i][1] -1
 	      _v = self.board.checkPointsCollision(_x,_y)
               if _v['bottom']:
 	         _failed[0] = True
-#              if _v['top']:
-# 		 _failed['top'] = True
               if _v['other']:
 	         _failed[1] = True
-	       
+	         _other = True
+	      if  _v['top']:
+	         _top = True
               _temp.insert(i,[_x,_y])
               i+=1
-          self.autoDownShift = True  #enable down shift increment check
+          if _other and _top:
+	     _failed[2] = True 
 	  return [_temp,_orig,_failed]
       def detectLeftCollision(self):
 	  i       = 0
