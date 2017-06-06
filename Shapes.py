@@ -70,7 +70,6 @@ class Shapes(object):
                 self.board.freeze(self)
              self.drawShiftRotate()
 	  else:
-	     print _points
              self.board.freeze(self)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
 
