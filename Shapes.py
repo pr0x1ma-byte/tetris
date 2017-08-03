@@ -7,15 +7,21 @@
 #from ZShape import ZShapeL
 
 from Rotate import Rotate
-import unicornhat as unicorn
 from random import randint
 import time
-
-unicorn.set_layout(unicorn.AUTO)
-unicorn.rotation(0)
-width,height=unicorn.get_shape()
-unicorn.brightness(.6)
-
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+height = 8
+width = 8
+options = RGBMatrixOptions()
+options.rows = 32
+options.chain_length = 1
+options.parallel = 1
+options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
+#options.rotation = 90
+matrix = RGBMatrix(options = options)
+canvas = matrix.CreateFrameCanvas()
+canvas = matrix.SwapOnVSync(canvas);
+print canvas
 class Shapes(object):
       def __init__(self, origin, points, angle, auto):
 	  self.autoDownShift = auto
@@ -67,10 +73,10 @@ class Shapes(object):
              self.points = _points
              shapeWrapper.shiftIndex+=1
 	     if shapeWrapper.shiftIndex > 7:
-                self.board.freeze(self)
+                self.board.freeze(self,canvas,matrix)
              self.drawShiftRotate()
 	  else:
-             self.board.freeze(self)
+             self.board.freeze(self,canvas,matrix)
              shapeWrapper.shiftIndex=9 #? trigger new object on next pass
 
       def shiftDecision(self, _data, shapeWrapper): 
@@ -153,27 +159,29 @@ class Shapes(object):
           self.shiftDecision(self.detectRightCollision(), shapeWrapper)
 
       def drawShiftRotate(self):
-	  unicorn.clear()
+	  global canvas
+          matrix.Clear();
           i  = 0
           for j in self.points:
               _x = self.points[i][0]
               _y = self.points[i][1]
               if _x <= height-1 and _y <=height-1 and _x >= 0 and _y >= 0:
-                 unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
+                 canvas.SetPixel(_x,_y,self.color[0],self.color[1],self.color[2]);
               i+=1
-          self.board.draw()
-          unicorn.show()
+          self.board.draw(canvas)	
+ 	  canvas = matrix.SwapOnVSync(canvas);
 
       def draw(self):
-          unicorn.clear()
+	  global canvas
+	  matrix.Clear()
 	  i  = 0
           for j in self.points:
               _x = self.points[i][0]
               _y = self.points[i][1]
-	      if _x <= height-1 and _y <=height-1 and _x >= 0 and _y >= 0:
-                 unicorn.set_pixel(_x,_y,self.color[0],self.color[1],self.color[2]);
+	      if _x <= height-1 and _y <=height-1 and _x >= 0 and _y >= 0:  
+	         canvas.SetPixel(_x,_y,self.color[0],self.color[1],self.color[2]);
               i+=1
-	  unicorn.show()
+	  canvas = matrix.SwapOnVSync(canvas);
               
       def setBoard(self,board):
           self.board = board

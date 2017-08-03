@@ -1,21 +1,20 @@
-import unicornhat as unicorn
 class Board():
       def __init__(self):
 	  self.dummy=0;
 	  self.board      = self.identity();
 	  self.boardColor = self.identityColor();
 	  	  
-      def freeze(self,shape):
+      def freeze(self,shape,canvas,matrix):
           i = 0
 	  points = shape.points
           for j in points:
 	      self.board[points[i][0]][points[i][1]]      = 1
 	      self.boardColor[points[i][0]][points[i][1]] = shape.color
 	      i+=1
-          self.rowCompleteCheck()
-	  unicorn.clear()
-	  self.draw()
-	  unicorn.show()
+          self.rowCompleteCheck(canvas,matrix)
+	  matrix.Clear()
+	  self.draw(canvas)
+	  canvas = matrix.SwapOnVSync(canvas)
 
       def identity(self):
           return [ [0,0,0,0,0,0,0,0],
@@ -37,16 +36,16 @@ class Board():
 		   [[],[],[],[],[],[],[],[]],
                    [[],[],[],[],[],[],[],[]]]
   	
-      def rowCompleteCheck(self):
+      def rowCompleteCheck(self,canvas,matrix):
 
 
           while True:
 		_i = self.getFirstCompleteIndex()
 	        if _i > -1:
-	           unicorn.clear()
+	           matrix.Clear()
 		   self.shiftAndClear(_i)
-	           self.draw()
-		   unicorn.show()
+	           self.draw(canvas)
+		   canvas = matrix.SwapOnVSync(canvas)
 	        else:
 	           break
 	                   	
@@ -60,12 +59,12 @@ class Board():
 
 	  return _val
           
-      def draw(self):
+      def draw(self,canvas):
           for j in range(0,8):
 	      for k in range(0,8):
 	          _c = self.boardColor[j][k]
 	          if _c != []:
-	             unicorn.set_pixel(j,k,_c[0],_c[1],_c[2]);
+	             canvas.SetPixel(j,k,_c[0],_c[1],_c[2]);
              
       def shiftAndClear(self, _x):
 	   for j in range(0,8):
