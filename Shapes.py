@@ -10,18 +10,23 @@ from Rotate import Rotate
 from random import randint
 import time
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-height = 8
-width = 8
+height = 32
+width = 32
 options = RGBMatrixOptions()
 options.rows = 32
 options.chain_length = 1
 options.parallel = 1
+options.brightness = 100
+#options.show_refresh_rate = 1
+options.gpio_slowdown = 2
+options.pwm_lsb_nanoseconds = 325
+options.pwm_bits = 11
 options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 #options.rotation = 90
 matrix = RGBMatrix(options = options)
 canvas = matrix.CreateFrameCanvas()
 canvas = matrix.SwapOnVSync(canvas);
-print canvas
+#print canvas
 class Shapes(object):
       def __init__(self, origin, points, angle, auto):
 	  self.autoDownShift = auto
@@ -51,7 +56,7 @@ class Shapes(object):
           for j in self.points:
               xy = self.rotater.getRotatedPoint(ox,oy,self.points[i][0],self.points[i][1],self.angle);
               _v = self.board.checkPointsCollision(xy[0],xy[1])
-	      if xy[0] > 7 or xy[0] < 0 or xy[1] < 0:
+	      if xy[0] > width - 1 or xy[0] < 0 or xy[1] < 0:
 	         _failed = True
 	      if _v['other']:
 	         _failed = True 
@@ -72,7 +77,7 @@ class Shapes(object):
              self.origin = _origin
              self.points = _points
              shapeWrapper.shiftIndex+=1
-	     if shapeWrapper.shiftIndex > 7:
+	     if shapeWrapper.shiftIndex > height - 1:
                 self.board.freeze(self,canvas,matrix)
              self.drawShiftRotate()
 	  else:

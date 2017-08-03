@@ -9,7 +9,7 @@ from random import randint
 from Board import Board
 import threading
 import time
-
+height = 32
 class ShapesWrapper():
       def __init__(self, observer):
           self.shiftIndex = 0
@@ -27,7 +27,7 @@ class ShapesWrapper():
 
       def shift(self):
           if not self.exit:
-             if self.shiftIndex > 7:
+             if self.shiftIndex > height - 1:
                 self.shiftIndex = 0
                 self.getNewObject()
 #             self.board.detect(self.shape);

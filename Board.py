@@ -1,3 +1,5 @@
+height = 32
+width  = 32
 class Board():
       def __init__(self):
 	  self.dummy=0;
@@ -16,6 +18,7 @@ class Board():
 	  self.draw(canvas)
 	  canvas = matrix.SwapOnVSync(canvas)
 
+''' //todo expand identity matricies to 32x32, may have to adjust the various size numbers 8,7, and 6...'''
       def identity(self):
           return [ [0,0,0,0,0,0,0,0],
 		   [0,0,0,0,0,0,0,0],
@@ -52,28 +55,28 @@ class Board():
       def getFirstCompleteIndex(self):
 	  _sum = self.sumX()
 	  _val = -1
-	  for j in range(0,8):
-	      if _sum[j][0] > 7:
+	  for j in range(0,height):
+	      if _sum[j][0] > height - 1:
 	         _val = j
                  break
 
 	  return _val
           
       def draw(self,canvas):
-          for j in range(0,8):
-	      for k in range(0,8):
+          for j in range(0,height):
+	      for k in range(0,height):
 	          _c = self.boardColor[j][k]
 	          if _c != []:
 	             canvas.SetPixel(j,k,_c[0],_c[1],_c[2]);
              
       def shiftAndClear(self, _x):
-	   for j in range(0,8):
+	   for j in range(0,height):
 	       _a = self.board[j]
 	       _b = self.boardColor[j]
 	       del _a[_x]
 	       del _b[_x]
-	       _a.insert(6,0)
-               _b.insert(6,[])
+	       _a.insert(height - 2,0)
+               _b.insert(height - 2,[])
 	       self.board[j]      = _a
 	       self.boardColor[j] = _b
 
@@ -93,11 +96,11 @@ class Board():
 	  if _y < 0:
 	     _failed['bottom'] = True
 	  else:
-	     if _y > 6:
+	     if _y > height - 1:
 	        _failed['top'] = True
 	    #    if _v > 0:
 	    #       _failed['other'] = True
-	     elif _x > 7 or _x < 0:
+	     elif _x > width - 1 or _x < 0:
 	        _failed['side'] = True
 	     else:
 	        _v = self.board[_x][_y]
