@@ -1,5 +1,6 @@
-# Tetris-Game for Raspberry Pi + Unicorn Hat
+# Tetris-Game for 32x32 RGB LED Matrix
 No game engines or libraries used. 
 
-Classic Tetris game to played on Pimoroni's Unicorn Hat. 
-All code is developed by me (with exclusion of unicorn library of course).
+Classic Tetris game built for a 32x32 RGB LED Matrix. 
+Game is built on hzeller's rpi-rgb-led-matrix library found here:https://github.com/hzeller/rpi-rgb-led-matrix
+
