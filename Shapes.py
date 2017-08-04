@@ -82,7 +82,7 @@ class Shapes(object):
              self.drawShiftRotate()
 	  else:
              self.board.freeze(self,canvas,matrix)
-             shapeWrapper.shiftIndex=9 #? trigger new object on next pass
+             shapeWrapper.shiftIndex=33 #? trigger new object on next pass
 
       def shiftDecision(self, _data, shapeWrapper): 
           _points = _data[0]

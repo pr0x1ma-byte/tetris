@@ -18,6 +18,7 @@ class ShapesWrapper():
           self.getNewObject()
           self.exit = False
 	  self.observer = observer
+	  self.speed = .2
 
       def getNewObject(self):
           val = randint(0,6);
@@ -30,9 +31,11 @@ class ShapesWrapper():
              if self.shiftIndex > height - 1:
                 self.shiftIndex = 0
                 self.getNewObject()
+#		self.speed = self.speed - .005
 #             self.board.detect(self.shape);
              self.shape.shiftDown(self)
-             threading.Timer(1, self.shift).start()
+#	     self.speed = self.speed - .01
+             threading.Timer(.1, self.shift).start()
 
       def start(self):
           self.shift()
