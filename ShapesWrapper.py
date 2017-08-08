@@ -1,12 +1,4 @@
-from Line import Line
-from LRectangle import LRectangleR
-from LRectangle import LRectangleL
-from Square import Square
-from Triangle import Triangle
-from ZShape import ZShapeR
-from ZShape import ZShapeL
-from random import randint
-from Board import Board
+from ShapesQue import ShapesQue
 import threading
 import time
 height = 32
@@ -18,12 +10,14 @@ class ShapesWrapper():
           self.getNewObject()
           self.exit = False
 	  self.observer = observer
-	  self.speed = .2
+	  self.speed = .15
+	  self.shapesQue  = ShapesQue()
 
       def getNewObject(self):
-          val = randint(0,6);
-          o   = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
-          self.shape = o[val]
+          #val = randint(0,6);
+          #o   = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
+          #self.shape = o[val]
+	  self.shape = self.shapesQue.getNext()
           self.shape.setBoard(self.board)
 
       def shift(self):
@@ -35,7 +29,7 @@ class ShapesWrapper():
 #             self.board.detect(self.shape);
              self.shape.shiftDown(self)
 #	     self.speed = self.speed - .01
-             threading.Timer(.1, self.shift).start()
+             threading.Timer(self.speed, self.shift).start()
 
       def start(self):
           self.shift()
