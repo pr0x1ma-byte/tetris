@@ -1,23 +1,21 @@
 from ShapesQue import ShapesQue
+from Board import Board
 import threading
 import time
 height = 32
 class ShapesWrapper():
       def __init__(self, observer):
           self.shiftIndex = 0
-          self.shape = []
 	  self.board = Board()
-          self.getNewObject()
+#          self.getNewObject()
           self.exit = False
 	  self.observer = observer
 	  self.speed = .15
-	  self.shapesQue  = ShapesQue()
-
+	  self.que  = ShapesQue()
+	  self.shape = self.que.getNext()
+	  self.shape.setBoard(self.board)
       def getNewObject(self):
-          #val = randint(0,6);
-          #o   = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
-          #self.shape = o[val]
-	  self.shape = self.shapesQue.getNext()
+	  self.shape = self.que.getNext()
           self.shape.setBoard(self.board)
 
       def shift(self):

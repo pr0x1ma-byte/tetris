@@ -8,20 +8,22 @@ from ZShape import ZShapeL
 from random import randint
 #
 class ShapesQue():
-      def __init__:
+      def __init__(self):
 	  self.que = []
-	  self.queShape()
+	  self.que.insert(0,self.genShape())
 
-      def getNext(self):
+      def getNext(self):          
 	  shape = self.que[0]
-	  index  = randint(0,6)
-	  shapes = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
-	  shape  = shapes[index]
 	  del self.que[:]
-	  self.que.insert(0,shape)
+	  self.que.insert(0,self.genShape())
 	  return shape
 	  
       def getShape(self):
-	  return self.que[0]	  
-	     
+	  return self.que[0]
+
+      def genShape(self):
+	  index  = randint(0,6)
+          shapes = [Line(),LRectangleL(),LRectangleR(),Triangle(),Square(),ZShapeL(),ZShapeR()]
+          shape  = shapes[index]	  
+	  return shape	     
 	  		
