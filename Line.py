@@ -1,6 +1,8 @@
 from Shapes import Shapes
 from random import randint
 import math
+width = 19
+height = 32
 class Line(Shapes):
       def __init__(self):
 	  self.autoDownShift = False
@@ -17,11 +19,11 @@ class Line(Shapes):
       def generate(self):
           if self.direction > 0:
              #vertical alignment
-	     self.origin  = [randint(2,30),32]
+	     self.origin  = [randint(2,width-2),height]
              self.point_1 = [self.origin[0],self.origin[1]-1]
  	     self.point_2 = [self.origin[0],self.origin[1]+1]         
           if self.direction < 1:
              #horizontal alignment
-             self.origin  = [randint(2,30),32]
+             self.origin  = [randint(2,width-2),height]
              self.point_1 = [self.origin[0]-1,self.origin[1]]
 	     self.point_2 = [self.origin[0]+1,self.origin[1]]

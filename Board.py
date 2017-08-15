@@ -1,5 +1,5 @@
 height = 32
-width  = 32
+width  = 20
 class Board():
       def __init__(self):
 	  self.dummy=0;
@@ -105,8 +105,8 @@ class Board():
       def getFirstCompleteIndex(self):
 	  _sum = self.sumX()
 	  _val = -1
-	  for j in range(0,height):
-	      if _sum[j][0] > height - 1:
+	  for j in range(0,width):
+	      if _sum[j][0] > width - 1:
 	         _val = j
                  break
 
@@ -114,13 +114,13 @@ class Board():
           
       def draw(self,canvas):
           for j in range(0,height):
-	      for k in range(0,height):
+	      for k in range(0,width):
 	          _c = self.boardColor[j][k]
 	          if _c != []:
 	             canvas.SetPixel(j,k,_c[0],_c[1],_c[2]);
              
       def shiftAndClear(self, _x):
-	   for j in range(0,height):
+	   for j in range(0,width):
 	       _a = self.board[j]
 	       _b = self.boardColor[j]
 	       del _a[_x]

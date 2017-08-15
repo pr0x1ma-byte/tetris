@@ -11,7 +11,7 @@ from random import randint
 import time
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 height = 32
-width = 32
+width = 20
 options = RGBMatrixOptions()
 options.rows = 32
 options.chain_length = 1
@@ -19,7 +19,7 @@ options.parallel = 1
 options.brightness = 100
 #options.show_refresh_rate = 1
 options.gpio_slowdown = 2
-options.pwm_lsb_nanoseconds = 325
+options.pwm_lsb_nanoseconds = 100
 options.pwm_bits = 11
 options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 #options.rotation = 90
@@ -29,7 +29,7 @@ canvas = matrix.SwapOnVSync(canvas);
 #print canvas
 class Shapes(object):
       def __init__(self, origin, points, angle, auto):
-	  self.autoDownShift = auto
+#	  self.drawBorder()
           self.origin  = origin
           self.points  = points
           self.angle   = angle
@@ -131,7 +131,7 @@ class Shapes(object):
               _x = _points[i][0] + 1
               _y = _points[i][1]
 	      _v = self.board.checkPointsCollision(_x,_y)
-              if _x > width-1:
+              if _x > width-1:#-1
                  _failed = True
 	      if _v['other'] or _v['side']:
 	         _failed = True
@@ -174,9 +174,11 @@ class Shapes(object):
                  canvas.SetPixel(_x,_y,self.color[0],self.color[1],self.color[2]);
               i+=1
           self.board.draw(canvas)	
+	  self.drawBorder(canvas)
  	  canvas = matrix.SwapOnVSync(canvas);
 
       def draw(self):
+	  print 'here...'
 	  global canvas
 	  matrix.Clear()
 	  i  = 0
@@ -190,3 +192,10 @@ class Shapes(object):
               
       def setBoard(self,board):
           self.board = board
+      
+      def drawBorder(self,canvas):
+	  i = 0
+	  for j in range (0,height-1):
+	      canvas.SetPixel(width,i,255,255,255)
+	      i+=1
+		

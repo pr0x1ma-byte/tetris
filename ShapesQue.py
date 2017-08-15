@@ -27,3 +27,5 @@ class ShapesQue():
           shape  = shapes[index]	  
 	  return shape	     
 	  		
+#      def drawQue(self):
+

@@ -16,6 +16,7 @@ class ShapesWrapper():
 	  self.shape.setBoard(self.board)
       def getNewObject(self):
 	  self.shape = self.que.getNext()
+	  print self.shape.color
           self.shape.setBoard(self.board)
 
       def shift(self):
@@ -25,6 +26,7 @@ class ShapesWrapper():
                 self.getNewObject()
 #		self.speed = self.speed - .005
 #             self.board.detect(self.shape);
+#	     self.shape.drawBorder();
              self.shape.shiftDown(self)
 #	     self.speed = self.speed - .01
              threading.Timer(self.speed, self.shift).start()
