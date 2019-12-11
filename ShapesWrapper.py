@@ -2,18 +2,24 @@ from ShapesQue import ShapesQue
 from Board import Board
 import threading
 import time
+
 height = 32
-class ShapesWrapper():
-      def __init__(self, observer):
+class ShapesWrapper(threading.Thread):
+      def __init__(self, key):
+          threading.Thread.__init__(self)
+
           self.shiftIndex = 0
 	  self.board = Board()
-#          self.getNewObject()
+
           self.exit = False
-	  self.observer = observer
+	  
 	  self.speed = .15
 	  self.que  = ShapesQue()
 	  self.shape = self.que.getNext()
 	  self.shape.setBoard(self.board)
+
+	  self.key = key
+
       def getNewObject(self):
 	  self.shape = self.que.getNext()
 	  print self.shape.color
@@ -31,6 +37,21 @@ class ShapesWrapper():
 #	     self.speed = self.speed - .01
              threading.Timer(self.speed, self.shift).start()
 
-      def start(self):
+      def run(self):
           self.shift()
+          
+          while not self.exit:
+              key = self.key.get()
 
+              if key == Key.UP:
+                  self.shape.rotate()
+              elif key == Key.DOWN:
+                  self.shape.shiftDown(self)
+              elif key == Key.LEFT:
+                  self.shape.shiftLeft(self)
+              elif key == Key.RIGHT:
+                  self.shape.shiftRight(self)
+              elif key == Key.END:
+                  self.exit = True
+                  break;
+    
