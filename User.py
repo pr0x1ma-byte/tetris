@@ -1,6 +1,7 @@
 import threading
 import tty
 import sys
+import os
 from Key import Key
 class User(threading.Thread):
       def __init__(self,key):
@@ -25,7 +26,8 @@ class User(threading.Thread):
                  elif ch == 'd':
                     self.key.put(Key.RIGHT)
                  elif ch == 'b':
-		    self.key.put(Key.END)	
+		    os.system('stty sane');
+                    self.key.put(Key.END)	
                     break;
 #	  print("size: "+str(ob.snake.size));
 #	  ob.end();

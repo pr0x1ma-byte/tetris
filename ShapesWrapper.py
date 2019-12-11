@@ -2,7 +2,7 @@ from ShapesQue import ShapesQue
 from Board import Board
 import threading
 import time
-
+from Key import Key
 height = 32
 class ShapesWrapper(threading.Thread):
       def __init__(self, key):
@@ -41,17 +41,17 @@ class ShapesWrapper(threading.Thread):
           self.shift()
           
           while not self.exit:
-              key = self.key.get()
+              ik = self.key.get()
 
-              if key == Key.UP:
+              if ik  == Key.UP:
                   self.shape.rotate()
-              elif key == Key.DOWN:
+              elif ik == Key.DOWN:
                   self.shape.shiftDown(self)
-              elif key == Key.LEFT:
+              elif ik == Key.LEFT:
                   self.shape.shiftLeft(self)
-              elif key == Key.RIGHT:
+              elif ik == Key.RIGHT:
                   self.shape.shiftRight(self)
-              elif key == Key.END:
+              elif ik == Key.END:
                   self.exit = True
                   break;
     
