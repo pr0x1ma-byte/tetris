@@ -1,33 +1,31 @@
 import threading
 import tty
 import sys
-
+from Key import Key
 class User(threading.Thread):
-      def __init__(self,observer):
+      def __init__(self,key):
           threading.Thread.__init__(self)
-          self.observer = observer
-	  self.exit = False
-      def getObserver(self):
-          return self.observer
+          self.key = key
+      
       def run(self):
-          ob = self.getObserver()
+          
           tty.setraw(sys.stdin.fileno())
-          while not self.exit:
+          while True:
 #                if  bal.getExit():
 #                    bal.setUserExit();
 #                    break;
 #                else:
                  ch = sys.stdin.read(1)
                  if (ch == 'w'):
-                    ob.up()
+                    self.key.put(Key.UP)
                  elif (ch == 's'):
-                    ob.down()
+                    self.key.put(Key.DOWN)
                  elif ch == 'a':
-                    ob.left()
+                    self.key.put(Key.LEFT)
                  elif ch == 'd':
-                    ob.right()
+                    self.key.put(Key.RIGHT)
                  elif ch == 'b':
-		    ob.end();	
+		    self.key.put(Key.END)	
                     break;
 #	  print("size: "+str(ob.snake.size));
 #	  ob.end();

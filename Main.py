@@ -3,37 +3,28 @@ from ShapesWrapper import ShapesWrapper
 from User import User
 import os
 import sys
-class Observer():
-      def __init__(self):
-	  self.exit = False;
-	  self.shapesWrapper = ShapesWrapper(self);
-          self.user = User(self);
-	  self.bodyCollision=False
-      def end(self):
-	  print 'exiting ...'
-	  self.user.exit = True;
-          self.shapesWrapper.exit = True;
-	  os.system('stty sane');
-	  sys.exit();
-      def up(self):
-	  self.shapesWrapper.shape.rotate();
-      def down(self):
-	  self.shapesWrapper.shape.shiftDown(self.shapesWrapper);
-      def right(self):
-	  self.shapesWrapper.shape.shiftRight(self.shapesWrapper);
-      def left(self):
-	  self.shapesWrapper.shape.shiftLeft(self.shapesWrapper);
-      def begin(self):
-#	  try:
-	  self.user.start();
-	  self.shapesWrapper.start();
-#	  except KeyboardInterrupt:
-#	   self.end();
-#	   self.cleanup();
+import Queue
+import threading
+
+class Game(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.key = Queue.Queue()
+        self.shapes_wrapper = ShapesWrapper(self.key)
+        self.user = User(self.key)
+        pass
+    def load(self):
+        self.shapes_wrapper.start()
+        self.user.start()
+    
+    def run(self):
+        self.load()
 
 
-obj = Observer()
+
 try:
-   obj.begin()
+   game = Game()
+   game.start()
 except KeyboardInterrupt:
-   obj.end()
+   pass
+

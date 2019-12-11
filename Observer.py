@@ -4,6 +4,10 @@ import unicornhat as unicorn
 from pyfiglet import figlet_format
 import os
 import sys
+import queue
+
+from Key import Key
+
 k=-1
 unicorn.brightness(.5)
 unicorn.set_layout(unicorn.AUTO)
@@ -13,8 +17,9 @@ unicorn.rotation(0)
 class observer():
       def __init__(self):
 	  self.exit = False;
+          self.input = Queue()
 	  self.generator = Generator();
-          self.user = user(self);
+          self.user = user(self.input);
 	  self.bodyCollision=False
       def end(self):
 	  self.exit = True;
@@ -42,6 +47,10 @@ class observer():
 	  try:
 	   self.user.start();
 	   self.generator.start();
+
+           while True:
+               key = self.input.get()
+               
 	  except KeyboardInterrupt:
 	   self.end();
 	   self.cleanup();
